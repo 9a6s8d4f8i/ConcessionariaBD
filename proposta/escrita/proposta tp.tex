@@ -1,0 +1,83 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass{article}
+
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx,graphpap}
+\usepackage{url}
+
+\begin{document}
+\begin{titlepage}
+
+\begin{center}
+\textbf{UNIVERSIDADE FEDERAL DE OURO PRETO}
+
+\textit{Departamento de Computação e Sistemas - DECSI\\Sistemas Distribuídos\\\vspace{2.5cm} Proposta de Trabalho Final\\Replicação e Sincronização de Bancos de Dados\\\vspace{3.5cm}Guilherme Marx \\ Ícaro Quintão \\ Leonardo Sartori\\\vspace{2cm} Engenharia de Computação\\\vspace{5cm} Professora: Carla Rodrigues Figueiredo Lara\\\vfill João Monlevade \\ \today}
+
+
+
+\end{center}
+
+\end{titlepage}
+
+\section*{Tema}
+
+Replicação de dados e sincronização de Bancos de Dados localizados em computadores diferentes.
+
+\section*{Título}
+
+Sistema de gerenciamento de uma Concessionária de Veículos.
+
+\section*{Membros do grupo}
+
+\begin{itemize}
+\item Guilherme Marx Ferreira Tavares \hfill \emph{14.1.8006}
+\item Ícaro Bicalho Quintão \hfill \emph{14.1.8083}
+\item Leonardo Sartori de Andrade \hfill \emph{15.1.8061}
+\end{itemize}
+
+\section*{Introdução}
+
+Em tempos antigos, os dados eram armazenados em fichas de papel e pastas. A partir da década de 70 surgiram os primeiros Bancos de Dados (BDs) relacionais da forma que são utilizados atualmente, os quais foram criados na intenção de facilitar a organização física e lógica dos dados com base em entidades e relacionamentos. 
+
+Nos dias atuais, a organização dos dados em BDs se tornou pré-requisito para qualquer empresa de sucesso. A utilização de consultas nesses bancos facilitou infinitamente a compreensão de dados armazenados e seus usos na administração de empresas.
+
+\section*{Justificativa}
+
+A utilização de BDs em sistemas maiores, entretanto, nos tras diversos problemas. O primeiro e mais marcante deles é manter a consistência dos dados. Em sistemas grandes, temos muitos dispositivos fazendo consultas e escritas nesse BD e são necessários mecanismos para manter os dados existentes nele corretos.
+
+
+Outro problema marcante em Bancos de Dados utilizados em sistemas maiores é o gargalo. Muitos dispositivos tentando acessar o mesmo banco pode causar lentidões e travamentos, o que significa prejuízo quando esses problemas são inseridos no contexto de empresas.
+
+Para contornar esses problemas, podemos nos utilizar de BDs distribuídos em arquitetura \emph{Peer-to-peer}. Dessa forma, cada computador tem seu próprio banco de dados e o sistema se responsabiliza de sincronizá-los de forma transparente ao usuário do sistema.
+
+
+\section*{Desenvolvimento Proposto}
+
+O instalador do sistema deverá ser único. Uma vez instalado em uma máquina, ele se conecta via arquitetura \emph{Peer-to-peer} com as demais máquinas da rede e se atualiza com os dados enviados por elas. Os objetos compartilháveis representarão objetos DAO que foram inseridos, removidos ou atualizados no estado mais atual dos bancos de dados.
+
+Será utilizada Comunicação indireta e síncrona, uma vez que, a fim de se manter transparente ao usuário do sistema, não haverá cadastro de ips em um servidor específico, ao invés disso, todos os computadores da rede receberão as atualizações que forem feitas em todos os Bancos em uma porta específica para comunicação desse sistema.
+
+Como arquitetura do Software do sistema, será utilizado o padrão Model-View-Controller com um pacote DAO explicitamente separado a fim de ser utilizado como objetos compartilháveis.
+
+\section*{Cronograma de atividades}
+
+\begin{enumerate}
+\item De 14/09 à 13/10: \hfill Desenvolvimento do módulo Model.
+\item De 14/10 à 13/11: \hfill Desenvolvimento do módulo View.
+\item De 14/11 à 09/12: \hfill Desenvolvimento do módulo Controller.
+\end{enumerate}
+
+\section*{Referências}
+
+\begin{verbatim}
+ELMASRI, R.; NAVATHE, S. B. Sistemas de Banco de Dados. 6a ed. São 
+Paulo: Pearson, 2011.
+
+TANENBAUM, Andrew; STEEN, M. Van. Sistemas Distribuídos: Princípi- 
+os e Paradigmas. 2a Ed, Prentice-Hall, 2008.
+
+
+\end{verbatim}
+\end{document}

@@ -1,0 +1,130 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[10pt,brazil]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{color,colortbl,multirow}
+\usetheme{Luebeck}
+\DeclareUnicodeCharacter{22EF}{ }
+\usepackage{gensymb}
+\usepackage{hyperref}
+\setbeamertemplate{footline}
+{
+	\leavevmode%
+	\hbox{%
+		
+		\begin{beamercolorbox}[wd=.666666\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			\usebeamerfont{title in head/foot}\inserttitle
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+			\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+			\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+	\end{beamercolorbox}}%
+	\vskip0pt%
+}
+
+\usepackage{caption}
+\definecolor{azul}{HTML}{962038}
+\setbeamercolor{structure}{fg=azul}
+\usepackage{multicol}
+\usepackage{media9}
+
+
+\usepackage[alf]{abntex2cite}
+\pgfdeclareimage[height=1.8cm]{logo}{UFOP}
+\logo{\pgfuseimage{logo}}
+\newcommand{\nologo}{\setbeamertemplate{logo}{}}
+\setlength{\parskip}{0.2cm}
+
+\title[Resumo]{Andamento do Trabalho Prático}
+
+\author[ICEA - UFOP]{Guilherme Marx, Ícaro Bicalho e Leonardo Sartori}
+
+\begin{document}
+ 	   \maketitle
+		\begin{frame}{Sumário}
+			\tableofcontents
+		\end{frame}
+%---------------------------------------------------------
+
+
+\section{Adequação ao Cronograma}
+
+\begin{frame}{Adequação ao cronograma}	
+	\begin{itemize}
+		\item Na apresentação anterior, foi proposto o seguinte cronograma:
+		\begin{enumerate}
+			\item De 14/09 à 13/10: \hfill Desenvolvimento do módulo Model.
+			\item De 14/10 à 13/11: \hfill Desenvolvimento do módulo View.
+			\item De 14/11 à 09/12: \hfill Desenvolvimento do módulo Controller.
+		\end{enumerate}
+		\item O mesmo não pôde ser seguido, isso devido ao fato de que o \emph{Middleware} que iríamos utilizar não serviu ao nosso propósito e, após muitas pesquisas, vimos a inviabilidade de continuar usando arquitetura \emph{Peer-To-Peer} nesse projeto.	
+	\end{itemize}
+\end{frame}
+
+\section{Decisões de Projeto}
+\begin{frame}{Arquitetura de Rede}
+	\begin{itemize}
+		\item Abandono da arquitetura \emph{Peer-To-Peer} e adoção da arquitetura Cliente-Servidor.
+		\item Como a ideia do trabalho é não ter um servidor centralizado, o projeto foi dividido em duas entidades:
+		
+		\begin{enumerate}
+			\item \emph{Banco de IDs}: Um mini-servidor, serve para armazenar IDs das operações feitas no Banco de Dados e o nome do respectivo cliente que possui os scripts dessa alteração.
+			\item \emph{Cliente}: Apesar do nome, ele é cliente em sua relação com o Banco de IDs e também pode ser cliente ou servidor em sua relação com outros Clientes.
+		\end{enumerate}
+		\item Comunicação em sua maioria é feita por meio de duas interfaces RMI, uma entre Cliente e Banco de IDs e outra entre Cliente e Cliente.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{A comunicação RMI}
+
+
+{\small
+		\begin{enumerate}
+			\item Cliente que deseja fazer uma alteração no banco de dados local se comunica com o Banco de IDs para que este atualize as entradas em sua tabela de IDs colocando o nome deste Cliente no respectivo local da tabela.
+
+			\item Todos os clientes possuem uma \emph{Thread} que monitora essa tabela via RMI, assim, no momento em que essa \emph{Thread} detecta uma alteração na tabela, os Clientes pegam o nome de quem realizou essa alteração através de um método remoto. 
+
+			\item Uma vez em posse do nome de quem fez a alteração, os Clientes desatualizados chamam um método remoto no Cliente atualizado e pegam o \emph{script} da alteração.
+
+			\item Ao aplicar o mesmo \emph{script} em seus respectivos Bancos de Dados locais, os bancos se mantém atualizados, a replicação foi feita com sucesso.
+		\end{enumerate}
+		}
+\end{frame}
+
+
+\begin{frame}{A arquitetura MVC}
+	\begin{itemize}
+	 \item Para facilitar a organização das responsabilidades, decidimos por atribuir ao pacote \emph{Model} as funções de Coordenar alterações no banco de dados e comunicar via RMI com o Banco de IDs e com os outros Clientes.
+	 \item Assim, fica claro que o pacote \emph{Model} concentra a maior parte do trabalho, o que deixa o cronograma inicial (com 1 mês para o desenvolvimento de cada módulo) obsoleto.
+	 \item Por esse motivo, não pudemos trazer o pacote \emph{Model} completo para apresentação, como havia sido previsto.
+
+	\end{itemize}
+\end{frame}
+
+
+\section{O que já foi feito}
+\begin{frame}{O que já foi feito}
+	\begin{enumerate}
+		\item Diagrama Entidade-Relacionamento do Banco de Dados;
+		\item Esquema Relacional (projeto lógico) do Banco de Dados;
+		\item \emph{Script} de criação do Banco de Dados;
+		\item Interfaces RMI de todas as formas de comunicação do projeto;
+		\item Objetos Model.
+	\end{enumerate}
+\end{frame}	
+
+\section{Dúvidas?}
+\begin{frame}{Dúvidas?}
+Dúvidas, críticas, sugestões?
+\end{frame}
+
+\section{Finalização}
+
+\begin{frame}{Repositório GitHub do projeto}
+	
+	\href{https://github.com/guilhermemarx14/Concessionaria}{https://github.com/guilhermemarx14/Concessionaria}
+	
+\end{frame}
+
+
+	\end{document}

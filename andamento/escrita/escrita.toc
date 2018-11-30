@@ -1,0 +1,5 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Adequa\IeC {\c c}\IeC {\~a}o ao cronograma}{1}{section.1}
+\contentsline {section}{\numberline {2}Decis\IeC {\~o}es de Projeto}{1}{section.2}
+\contentsline {section}{\numberline {3}O que j\IeC {\'a} foi feito?}{2}{section.3}
+\contentsline {section}{\numberline {4}Pr\IeC {\'o}ximos passos}{2}{section.4}

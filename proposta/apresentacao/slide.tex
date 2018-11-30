@@ -1,0 +1,209 @@
+% !TEX encoding = UTF-8 Unicode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage[utf8]{inputenc}  
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage[brazilian]{babel}
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title[Index]{Sistema de Gerenciamento de uma Concessionária de Veículos} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Guilherme Marx\\Ícaro Quintão\\Leonardo Sartori } % Your name
+\institute[UFOP] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
+{
+Universidade Federal de Ouro Preto \\ % Your institution for the title page
+\medskip
+\textit{guilhermemarx14@gmail.com \\ icarobicalho@hotmail.com \\ sartorileo.ufop@gmail.com} % Your email address
+}
+\date{\today} % Date, can be changed to a custom date
+
+%------------------------------------------------
+\begin{document}
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+\frametitle{Sumário} % Table of contents slide, comment this block out to remove it
+\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+%------------------------------------------------
+\section{Introdução} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+
+%------------------------------------------------
+\subsection{Contexto} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+\begin{frame}
+\frametitle{Contexto}
+
+\begin{itemize}
+\item Em tempos antigos, os dados eram armazenados em fichas de papel e pastas. A partir da década de 70 surgiram os primeiros Bancos de Dados (BDs) relacionais da forma que são utilizados atualmente, os quais foram criados na intenção de facilitar a organização física e lógica dos dados com base em entidades e relacionamentos. 
+
+\item Nos dias atuais, a organização dos dados em BDs se tornou pré-requisito para qualquer empresa de sucesso. A utilização de consultas nesses bancos facilitou infinitamente a compreensão de dados armazenados e seus usos na administração de empresas.
+
+\end{itemize}
+\end{frame}
+
+\subsection{Tema}
+
+\begin{frame}
+\frametitle{Tema}
+
+\begin{itemize}
+\item Replicação de dados e sincronização de Bancos de Dados localizados em computadores diferentes.
+\end{itemize}
+\end{frame}
+
+\section{Justificativa}
+
+\subsection{O uso de BDs em sistemas grandes}
+\begin{frame}
+\frametitle{O uso de BDs em sistemas grandes}
+
+\begin{enumerate}
+\item Escrita bloqueante;
+\item Gargalo.
+\end{enumerate}
+
+\vfill
+\begin{itemize}
+\item Solução? Bancos de Dados distribuídos em arquitetura \emph{Peer-To-Peer}.
+\end{itemize}
+\end{frame}
+
+\section{Desenvolvimento Proposto}
+\subsection{Arquitetura de Software}
+\begin{frame}
+\frametitle{Arquitetura de Software}
+\begin{itemize}
+\item \emph{Model-View-Controller} com pacote \emph{DAO} que será incluso no \emph{Model}.
+\end{itemize}
+\end{frame}
+
+\subsection{Arquitetura do Banco de Dados}
+\begin{frame}
+\frametitle{Arquitetura do Banco de Dados}
+\begin{itemize}
+\item Banco de Dados SQL-relacional com MySQL.
+\end{itemize}
+\end{frame}
+
+\subsection{Arquitetura de Rede}
+\begin{frame}
+\frametitle{Arquitetura de Rede}
+\begin{itemize}
+\item Comunicação \emph{Peer-to-peer} com middleware \emph{X-Peer}.
+\item Objetos \emph{DAO} compartilháveis.
+\item Comunicação Indireta e síncrona.
+\end{itemize}
+
+\end{frame}
+
+\section{Cronograma de atividades}
+\begin{frame}
+\frametitle{Cronograma de atividades}
+\begin{enumerate}
+\item De 14/09 à 13/10: \hfill Desenvolvimento do módulo Model.
+\item De 14/10 à 13/11: \hfill Desenvolvimento do módulo View.
+\item De 14/11 à 09/12: \hfill Desenvolvimento do módulo Controller.
+\end{enumerate}
+\end{frame}
+
+\section{Referências}
+\begin{frame}
+\frametitle{Referências}
+
+ELMASRI, R.; NAVATHE, S. B. Sistemas de Banco de Dados. 6a ed. São Paulo: Pearson, 2011.
+\newline
+\newline
+TANENBAUM, Andrew; STEEN, M. Van. Sistemas Distribuídos: Princípios e Paradigmas. 2a Ed, Prentice-Hall, 2008.
+\newline
+\newline
+HARVEY M. DEITEL, PAUL J. DEITEL.  Java como programar. 8a Ed., Prentice Hall - Br, 2010.
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,141 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[brazil, a4paper,12pt]{article}
+\bibliographystyle{plain}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{indentfirst}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\geometry{a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.93cm}
+
+\lstset{numbers=left,
+stepnumber=0,
+firstnumber=1,
+numberstyle=\tiny,
+extendedchars=true,
+breaklines=true,
+frame=tb,
+tabsize=2,
+basicstyle=\footnotesize,
+stringstyle=\ttfamily,
+showstringspaces=false
+}
+
+\renewcommand{\lstlistingname}{Programa}
+
+\begin{document}
+\begin{titlepage}
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+      Universidade Federal de Ouro Preto
+    \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Instituto de Ciências Exatas e Aplicadas
+    \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Departamento de Computação e Sistemas
+    \end{large}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \begin{Large}
+      \textbf{SISTEMAS DISTRIBUÍDOS\\[0.4cm] 
+        Resumo - Andamento do Trabalho Prático}               
+    \end{Large}
+  \end{center}
+
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+
+   	Guilherme Marx Ferreira Tavares \hfill 14.1.8006
+
+	Ícaro Bicalho Quintão \hfill 14.1.8083
+	
+	Leonardo Sartori de Andrade \hfill 15.1.8061
+
+       \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Professora - Carla Rodrigues Figueiredo Lara
+    \end{large}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+      João Monlevade \\
+      \today \\
+    \end{large}
+  \end{center}
+
+\clearpage
+\tableofcontents 
+\end{titlepage}
+
+%--------------------------------------------------------
+\section{Adequação ao cronograma}
+Na apresentação da proposta, propusemos um cronograma de trabalho que não pôde ser cumprido. Isso se deu ao fato de que o \emph{Middleware} que iríamos utilizar não serviu ao nosso propósito e após muitas pesquisas, vimos ser inviável o uso de arquitetura \emph{peer-to-peer} nesse trabalho de replicação de dados.
+
+\section{Decisões de Projeto}
+A primeira e mais importante decisão de projeto tomada foi o abandono da arquitetura \emph{peer-to-pier} e uso de arquitetura Cliente-Servidor. 
+
+Como o fato de não se ter um servidor central é pré-requisito do projeto, nosso trabalho fica concentrado em duas entidades:
+\begin{itemize}
+\item Banco de IDs: Um mini-servidor, serve para armazenar IDs das operações feitas no Banco de Dados e o nome do respectivo cliente que fez essa operação.
+\item Cliente: Apesar do nome, esse cliente é ao mesmo tempo Cliente (na relação com o Banco de IDs) e pode ser Cliente ou Servidor na relação com outros Clientes.
+\end{itemize}
+
+Essa comunicação funciona da seguinte forma: 
+\begin{enumerate}
+\item Cliente que deseja fazer uma alteração no banco de dados local se comunica com o Banco de IDs para que este atualize sua tabela de IDs colocando o nome deste Cliente no respectivo local de sua alteração (O Banco de IDs não armazenará nenhum script de alteração no banco de dados, somente o ID da operação e o nome do cliente que a fez).
+\item Todos os Clientes possuem uma \emph{thread} que monitora essa tabela no Banco de IDs via RMI, assim, no momento em que essa thread detecta uma alteração na tabela, os Clientes pegam o nome de quem fez a alteração através de um método remoto.
+\item Uma vez em posse do nome de quem fez a alteração, os Clientes desatualizados se comunicam via outra interface RMI com o Cliente que está atualizado e pegam o script da alteração que foi feita no banco.
+\item Ao aplicar o mesmo script em seus respectivos Bancos de Dados Locais, os bancos se mantém atualizados, a replicação foi feita com sucesso.
+\end{enumerate}
+
+Outra decisão importante tomada foi com relação a arquitetura \emph{Model-View-Controller}, foi decidido que seria mais organizado manter toda interação de rede dentro do pacote \emph{Model} de modo que este teria, então, as regras de negócio, toda a estrutura de controle do banco de dados e ainda toda a interface de comunicação em Rede. 
+
+Dessa forma, fica claro que o pacote \emph{Model} concentra a maior parte do trabalho, deixando o cronograma inicial (com 1 mês de desenvolvimento de cada pacote) obsoleto, uma vez que o \emph{Model} é a parte mais trabalhosa desse projeto.
+
+
+\section{O que já foi feito?}
+\begin{enumerate}
+	\item Repositório do projeto no GitHub: \url{https://github.com/guilhermemarx14/Concessionaria}
+	\item Diagrama Entidade-Relacionamento do Banco de Dados;
+	\item Esquema Relacional (projeto lógico) do Banco de Dados com definição das tabelas;
+	\item Script de criação do Banco;
+	\item Interface RMI da rede, que será utilizada tanto na comunicação entre Cliente-Banco de IDs quanto entre Cliente-Cliente;
+	\item Objetos Model.
+\end{enumerate}
+
+\section{Próximos passos}
+\begin{itemize}
+	\item Prototipação das telas do projeto e definição das consultas possíveis ao Banco.
+	\item Complementação dos Objetos Model e DAO para suportar todas essas possíveis consultas.
+	\item Desenvolvimento dos pacotes View e Controller.
+\end{itemize}
+
+
+
+\end{document}
